@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>내 링크 관리 | 링크나무</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="logo" href="/">🌳 링크나무</a>
+  <button class="btn btn-ghost btn-sm" id="logout" type="button">로그아웃</button>
+</header>
+
+<main class="admin" id="app" hidden>
+  <!-- 공유 주소 & 통계 -->
+  <section class="card">
+    <h2>내 페이지 주소</h2>
+    <div class="share-row">
+      <div class="share-url" id="share-url"></div>
+      <button class="btn btn-sm" id="copy" type="button">복사</button>
+      <a class="btn btn-ghost btn-sm" id="open" target="_blank" rel="noopener">열기 ↗</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-value" id="stat-links">0</div><div class="stat-label">등록된 링크</div></div>
+      <div class="stat"><div class="stat-value" id="stat-clicks">0</div><div class="stat-label">전체 클릭 수</div></div>
+    </div>
+  </section>
+
+  <!-- 프로필 -->
+  <section class="card">
+    <h2>프로필</h2>
+    <div class="avatar-row">
+      <div id="avatar-slot"></div>
+      <div class="avatar-actions">
+        <label class="btn btn-ghost btn-sm" style="margin:0">
+          사진 변경
+          <input type="file" id="avatar-input" accept="image/png,image/jpeg,image/webp" class="sr-only">
+        </label>
+        <button class="btn btn-ghost btn-sm btn-danger" id="avatar-remove" type="button">삭제</button>
+      </div>
+    </div>
+    <form id="profile-form">
+      <div class="field">
+        <label for="name">이름</label>
+        <input type="text" id="name" maxlength="40" required>
+      </div>
+      <div class="field">
+        <label for="bio">한 줄 소개</label>
+        <textarea id="bio" maxlength="100" rows="2" placeholder="예) 매일 코드를 쓰는 프론트엔드 개발자"></textarea>
+        <p class="hint"><span id="bio-count">0</span>/100</p>
+      </div>
+      <button class="btn" type="submit">프로필 저장</button>
+    </form>
+  </section>
+
+  <!-- 링크 -->
+  <section class="card">
+    <div class="card-head">
+      <h2>링크</h2>
+      <span class="muted" style="font-size:14px">카드를 누르면 클릭 수가 집계돼요</span>
+    </div>
+    <form class="add-form" id="add-form">
+      <div class="field">
+        <label for="new-title">링크 이름</label>
+        <input type="text" id="new-title" maxlength="60" placeholder="예) 인스타그램">
+      </div>
+      <div class="field">
+        <label for="new-url">주소</label>
+        <input type="url" id="new-url" placeholder="https://instagram.com/…" inputmode="url" autocapitalize="none" spellcheck="false">
+      </div>
+      <button class="btn" type="submit">추가</button>
+    </form>
+    <ul class="admin-links" id="links"></ul>
+    <p class="empty" id="links-empty" hidden>첫 번째 링크를 추가해 보세요.</p>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/static/admin.js"></script>
+</body>
+</html>
